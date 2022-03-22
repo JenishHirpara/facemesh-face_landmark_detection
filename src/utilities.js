@@ -2676,6 +2676,7 @@ export const drawMesh = (predictions, ctx) => {
                 //  Draw triangle
                 drawPath(ctx, points, true);
             }
+            // Draw points
             for(let i = 0; i < keypoints.length; i++) {
                 const x = keypoints[i][0];
                 const y = keypoints[i][1];
