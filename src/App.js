@@ -4,11 +4,11 @@
 // Define references to those DONE
 // Load facemesh DONE
 // Detect function DONE
-// Drawing utilities
-// Load triangulation
-// Setup triangle path
-// Setup point drawing
-// Add drawMesh to detect function
+// Drawing utilities DONE
+// Load triangulation DONE
+// Setup triangle path DONE
+// Setup point drawing DONE
+// Add drawMesh to detect function DONE
 
 import React, {useRef} from 'react';
 // import logo from './logo.svg';
@@ -64,7 +64,7 @@ function App() {
     }
   }
 
-  // runFacemesh();
+  runFacemesh();
   return (
     <div className="App">
       <header className="App-header">
