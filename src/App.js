@@ -2,8 +2,8 @@
 // Import dependencies DONE
 // Setup webcam and canvas DONE
 // Define references to those DONE
-// Load facemesh
-// Detect function
+// Load facemesh DONE
+// Detect function DONE
 // Drawing utilities
 // Load triangulation
 // Setup triangle path
@@ -16,6 +16,7 @@ import './App.css';
 import * as tf from '@tensorflow/tfjs';
 import * as facemesh from '@tensorflow-models/facemesh';
 import Webcam from 'react-webcam';
+import {drawMesh} from './utilities';
 
 function App() {
   // Setup references
@@ -28,6 +29,9 @@ function App() {
       inputResolution: {width: 640, height: 480},
       scale: 0.8,
     });
+    setInterval(() => {
+      detect(net)
+    },100);
   }
 
   // Detect function
@@ -35,20 +39,32 @@ function App() {
     if(
       typeof webcamRef.current !== 'undefined' && 
       webcamRef.current !== null && 
-      webcamRef.current.video.readState === 4
+      webcamRef.current.video.readyState === 4
     ) {
       // Get Video Properties
       const video = webcamRef.current.video;
       const videoWidth = webcamRef.current.video.videoWidth;
       const videoHeight = webcamRef.current.video.videoHeight;
-      
+
       // Set video width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
       // Set canvas width
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
+
       // Make detections
+      const face = await net.estimateFaces(video);
+      console.log(face);
+
       // Get canvas context for drawing
+      const ctx = canvasRef.current.getContext('2d');
+      drawMesh(face, ctx);
     }
   }
 
+  // runFacemesh();
   return (
     <div className="App">
       <header className="App-header">
