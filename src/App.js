@@ -1,7 +1,7 @@
 // Install dependencies DONE
 // Import dependencies DONE
 // Setup webcam and canvas DONE
-// Define references to those
+// Define references to those DONE
 // Load facemesh
 // Detect function
 // Drawing utilities
@@ -21,6 +21,33 @@ function App() {
   // Setup references
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  // Load facemesh
+  const runFacemesh = async () => {
+    const net = await facemesh.load({
+      inputResolution: {width: 640, height: 480},
+      scale: 0.8,
+    });
+  }
+
+  // Detect function
+  const detect = async (net) => {
+    if(
+      typeof webcamRef.current !== 'undefined' && 
+      webcamRef.current !== null && 
+      webcamRef.current.video.readState === 4
+    ) {
+      // Get Video Properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+      
+      // Set video width
+      // Set canvas width
+      // Make detections
+      // Get canvas context for drawing
+    }
+  }
 
   return (
     <div className="App">
